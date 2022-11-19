@@ -1,0 +1,71 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node*previous;
+    struct node*next;
+};
+void print(struct node*ptr){
+    while(ptr!=NULL){
+        printf("%d\n",ptr->data);
+        ptr=ptr->next;
+    }
+}
+struct node*creatnode(int value){
+    struct node*n=(struct node*)malloc(sizeof(struct node));
+    n->data=value;
+    n->next=NULL;
+    n->previous=NULL;
+}
+
+    
+    struct node*insertatfirst(struct node*first,int val){
+        struct node*ptr=creatnode(val);
+        ptr->next=first;
+        return ptr;
+    }
+struct node*insertafteragivennord(struct node*first,int value,struct node* pr){
+    struct node*ptr=creatnode(value);
+    ptr->next=pr->next;
+    pr->next=ptr;
+    return first;}
+    struct node *deleteatanindex(struct node *first,int value){
+        struct node *p=first;
+        struct node *q=first->next;
+        int i=0;
+        while(i!=value-1){
+            p=p->next;
+            q=q->next;
+        }
+        p->next=q->next;
+        free(q);
+        return first;
+    }
+
+
+int main(){
+
+   
+    struct node*first=creatnode(3);
+    struct node*second=creatnode(1);
+    struct node*third=creatnode(10);
+    first->next=second;
+    second->next=third;
+    second->previous=first;
+    third->previous=second;
+  // first = insertafteragivennord(first,4,second);
+    first = deleteatanindex(first,1);
+      print(first);
+  
+    return 0;
+}
+
+
